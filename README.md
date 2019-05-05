@@ -47,4 +47,5 @@ A “normally distributed” data set has most of the data aggregates around its
 Think about a factory producing 1 kg bags of sugar. They won’t always make each exactly 1 kg. In reality, the bags are around 1 kg. Most of the time they will be very close to 1 kg, and very rarely far from 1 Kg.  
 Example of normally distributed data: height of adults  
 
+![normal_distribution.jpg](normal_distribution.jpg)
   
