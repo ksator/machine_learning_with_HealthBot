@@ -23,5 +23,9 @@ Using HealthBot, it is easy to collect data from the network devices, to store t
 The purpose of the documentation [MACHINE_LEARNING_101.pdf](MACHINE_LEARNING_101.pdf) is to help peoples with no machine learning background to better understand machine learning basics.  
 It may seem weird to describe how to calculate a standard deviation, a variation, a Euclidean distance, an argmin, … but this is required to fully understand how k-means clustering works.  
 
+The file [3sigma.xls](3sigma.xls) computes the three-sigma rule 
+
+The file [kmeans.xls](kmeans.xls) computes one iteration of k-means with k=2  
+
 This repository has also configuration examples of HealthBot using machine learning to detect anomalies.  
 
