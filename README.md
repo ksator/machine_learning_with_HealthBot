@@ -6,7 +6,7 @@ Using HealthBot, it is easy to:
 - use machine learning for anomaly detection or outlier detection    
 
 In this repository, you will find: 
-- The file [machine_learning_with_HealthBot.pdf](machine_learning_with_HealthBot.pdf). The purpose of this document is to:  
+- The file [machine_learning_101.pdf](machine_learning_101.pdf). The purpose of this document is to:  
     - help peoples with no machine learning background to better understand machine learning basics 
     - describe machine learning usage with Healthbot  
 - The file [3sigma.xlsx](3sigma.xlsx). It computes the three-sigma rule 
@@ -33,7 +33,7 @@ HealthBot supports the following machine learning algorithms for outlier detecti
 - DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
 - K-fold Three-sigma ("K-Fold Cross-Validation" using "Three-sigma")
 
-For more details, please refer to the file [machine_learning_with_HealthBot.pdf](machine_learning_with_HealthBot.pdf). 
+For more details, please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf). 
 
 # Anomaly detection vs outlier detection
 
@@ -42,7 +42,7 @@ In HealthBot terminology:
 - anomaly detection is time based. It compares new data points from a device vs data points collected from the same device during a learning period.  
 - outlier detection is group based. It analyzes data from a device during a learning Period vs data from other devices during the same learning period
 
-For more details, please refer to the file [machine_learning_with_HealthBot.pdf](machine_learning_with_HealthBot.pdf). 
+For more details, please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf). 
 
 # lab building blocks   
 
