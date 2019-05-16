@@ -7,18 +7,18 @@ from time import time, sleep
 
 def update_junos():
     # template
-    f=open('machine_learning/update_routes.j2')
+    f=open('update_routes.j2')
     my_template = Template(f.read())
     f.close()
     # render template
-    f=open('machine_learning/update_routes.conf','w')
+    f=open('update_routes.conf','w')
     f.write(my_template.render())
     f.close()
     # Configure Junos device
     device=Device (host='100.123.1.0', user='jcluser', password='Juniper!1')
     device.open()
     cfg=Config(device, mode='private')
-    cfg.load(path='machine_learning/update_routes.conf', format='text')
+    cfg.load(path='update_routes.conf', format='text')
     cfg.commit()
     device.close()
 
