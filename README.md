@@ -33,7 +33,7 @@ The machine learning algorithm learns on a labeled dataset
 # Unsupervised learning 
 
 Learning without a teacher.  
-The machine learning uses unlabeled dataset. 
+The machine learning uses unlabeled dataset.  
 The advantage of using an unsupervised technique is that we do not need to have labeled data, i.e., we do not need to create a training dataset that contains examples of outliers.  
 k-means clustering and DBSCAN are unsupervised clustering machine learning algorithms.  
 They group the data that has not been previously labelled, classified or categorized.  
