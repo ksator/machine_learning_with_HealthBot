@@ -71,10 +71,5 @@ Its symbol is σ (the greek letter sigma)
 
 ## Calculate it by hand 
 
-Data set = 101, 102, 106, 107
-
-Mean = (101 +102 + 106 + 107)/4=104  
-((101-104)$n^2$ + (102-104)2 + (106-104)2 + (107-104)2)/4 = (9 + 4 + 4 + 9)/4 = 6.5  
-standard deviation = √6.5 = 2.549  
-
+![SD_hands.png](resources/SD_hands.png)
 
