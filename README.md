@@ -40,7 +40,7 @@ For more details, please refer to the file [machine_learning_with_HealthBot.pdf]
 # lab building blocks   
 
 - Junos devices 
-- One Ubuntu VM with healthbot
+- One Ubuntu VM with healthbot installed  
 
 # lab topology
 
@@ -51,6 +51,8 @@ You can use less Junos devices if you want
 # lab management IP addresses 
 
 Here are the management ip addresses I am using in my scripts.  
+If you are using other ip addresses, you need to update the automation content to match your ip addresses  
+
 You can use less Junos devices if you want
 
 | Device        | Management IP address           |
@@ -72,10 +74,8 @@ Starting with Junos OS Release 18.3R1:
 - the Junos OS image includes the ```OpenConfig``` package; therefore, you do not need anymore to install ```OpenConfig``` separately on your device.  
 - the Junos OS image includes the ```Network Agent```, therefore, you do not need anymore to install the ```network agent``` separately on your device.  
 
-This setup is using an older Junos release, so it is required to install these two packages. 
-
+If your setup is using an older Junos release, it is required to install these two packages.  
 Download these two packages from Juniper website and save them in your local directory.    
-
 Execute the python script [upgrade_junos.py](upgrade_junos.py) to add these two packages to the Junos devices indicated in this [inventory.yml](inventory.yml) file   
 
 Install the requirements:
@@ -109,13 +109,16 @@ JUNOS Openconfig [0.0.0.10-1]
 
 # Junos configuration
 
-we will the python script [configure_junos.py](configure_junos.py) to configure the lab.
+we will the python script [configure_junos.py](configure_junos.py) to configure the lab (IP fabric with EBGP)    
 
 This script uses: 
 - the template [junos.j2](configure_junos/junos.j2) 
 - the variables [junos.yml](configure_junos/junos.yml) 
 
-It generates the junos configuration for each device in the [inventory.yml](inventory.yml) file and load the junos configuration on devices.  
+It: 
+- generates a junos configuration file for each device indicated in the [inventory.yml](inventory.yml) file
+- save the generated configuration files in the directory [configure_junos](configure_junos) 
+- load the junos configuration files on the devices  
  
 Install the requirements: 
 ```
