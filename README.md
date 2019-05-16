@@ -67,5 +67,9 @@ Its symbol is σ (the greek letter sigma)
 
 ## Formula 
 
+![SD_formula.png](resources/SD_formula.png)  
 
 ## Calculate it by hand 
+  
+![SD_hands.png](resources/SD_hands.png)  
+
