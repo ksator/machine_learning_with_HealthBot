@@ -4,7 +4,7 @@ Using HealthBot, it is easy to collect data from the network devices, to store t
 
 In this repository, you will find: 
 - The file [machine_learning_with_HealthBot.pdf](machine_learning_with_HealthBot.pdf). The purpose of this document is:  
-    - to help peoples with no machine learning background to better understand machine learning basics. 
+    - to help peoples with no machine learning background to better understand machine learning basics (machine learning 101). 
     - to describe machine learning usage with Healthbot  
 - The file [3sigma.xlsx](3sigma.xlsx). It computes the three-sigma rule 
 - The file [kmeans.xlsx](kmeans.xlsx). It computes one iteration of k-means with k=2  
