@@ -44,18 +44,20 @@ In HealthBot terminology:
 
 For more details, please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf). 
 
-# lab building blocks   
+# Machine learning demo
+
+### lab building blocks   
 
 - Junos devices 
 - One Ubuntu VM with healthbot installed  
 
-# lab topology
+### lab topology
 
 Here's the lab topology I am using (spines and leaves).    
 You can use less Junos devices if you want
 ![topology.png](resources/topology.png)  
 
-# lab management IP addresses 
+### lab management IP addresses 
 
 Here are the management ip addresses I am using in my scripts.  
 If you are using other ip addresses, you need to update the automation content to use your ip addresses  
@@ -73,7 +75,7 @@ You can use less Junos devices if you want
 | vMX6      | 100.123.1.5   |
 | vMX7      | 100.123.1.6   |
 
-# Junos packages
+### Junos packages
 
 In order to collect data from Junos using openconfig telemetry, the devices require the Junos packages ```openconfig``` and ```network agent```
 
@@ -114,7 +116,7 @@ JUNOS na telemetry [18.2R1-S3.2-C1]
 JUNOS Openconfig [0.0.0.10-1]
 ```
 
-# Junos configuration
+### Junos configuration
 
 we will the python script [configure_junos.py](configure_junos.py) to configure the lab (IP fabric with EBGP)    
 
@@ -190,7 +192,9 @@ bgp session with peer 192.168.3.6+179 is Established
 
 ```
 
-# Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)
+### Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)
+
+##### Demo overview 
 
 In this demo, Healthbot will: 
 - continuously monitor the number of bgp prefixes received (using Openconfig telemetry)
@@ -198,6 +202,8 @@ In this demo, Healthbot will:
 - process the database
   - use the `k-means for anomaly detection` algorithm and `3 sigma` rule to build two machine learning models
   - use the machine learning models built to classify the new datapoints as `normal` or `abnormal`   
+
+##### HealthBot configuration 
 
 The HealthBot rule:  
 - [check-bgp-state-using-openconfig.rule](rules/check-bgp-state-using-openconfig.rule) uses OpenConfig telemetry to monitor BGP sessions state (without machine learning)  
@@ -240,9 +246,9 @@ healthbot configuration commited!
 $
 ```
 
-## Update the number of BGP prefixes received  
+##### Update the number of BGP prefixes received  
 
-Healthbot collects on each devices the number of BGP prefixes received.   
+Healthbot is collecting on each devices the number of BGP prefixes received.   
 
 To update the number of BGP prefixes received, you can use the python script [update_routes.py](update_routes.py).  
 - This script uses the template [update_routes.j2](update_routes.j2).  
