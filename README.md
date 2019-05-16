@@ -53,6 +53,7 @@ A "normally distributed" data set has most of the data aggregates around its mea
 Think about a factory producing 1 kg bags of sugar. They won’t always make each exactly 1 kg. In reality, the bags are around 1 kg. Most of the time they will be very close to 1 kg, and very rarely far from 1 Kg.  
 
 Example of normally distributed data: height of adults  
+
 ![normal_distribution.jpg](resources/normal_distribution.jpg)  
 
 
@@ -100,4 +101,21 @@ With a normal data set (normally distributed) (as example: height of adults):
 
 ![68–95–99.7-rule.png](resources/68–95–99.7-rule.png)  
 
+# three-sigma rule 
+
+## Overview
+
+sigma is the greek letter σ. This is also the Standard Deviation symbol  
+HealthBot uses 3-sigma rule for anomaly detection.   
+Three-sigma rule classifies a new data point as "normal" if it is between the (mean – 3 * standard deviations) and (mean + 3 * standard deviations)  
+Three-sigma rule classifies a new data point as "abnormal" if it is outside this range.  
+
+mean:  mean of the data set  
+SD: standard deviation of the data set  
+abs: absolute value  
+x: a new data point  
+If abs(x - mean) > (3 * SD) then tree-sigma classifies x as abnormal  
+If abs(x - mean) < (3 * SD) then tree-sigma classifies x as normal  
+
+## Calculate it by hand  
 
