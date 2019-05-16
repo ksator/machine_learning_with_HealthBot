@@ -37,7 +37,7 @@ For more details, please refer to the file [machine_learning_with_HealthBot.pdf]
 # lab building blocks   
 
 - Junos devices 
-- One Ubuntu VM (16.04) with healthbot
+- One Ubuntu VM with healthbot
 
 # lab topology
 
