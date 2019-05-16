@@ -11,7 +11,7 @@ In this repository, you will find:
 - Automation content to configure HealthBot:
   - Healthbot will use openconfig to collect data from Junos devices 
   - Healthbot will store the data collected in its database
-  - Healthbot will use machine learning algorithms to detect anomaly   
+  - Healthbot will process the data collected and use machine learning algorithms to detect anomaly   
 
 # About HealthBot 
 
