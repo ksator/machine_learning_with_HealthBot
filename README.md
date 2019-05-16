@@ -179,3 +179,82 @@ bgp session with peer 192.168.2.6+59682 is Established
 bgp session with peer 192.168.3.6+179 is Established
 
 ```
+
+# Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)
+
+In this demo, Healthbot will continuously monitor the number of bgp prefixes received (using Openconfig telemetry), store the data collected in its database, and use machine learning for anomaly detection to classify the new datapoints as normal or abnormal.  
+
+The rule [check-bgp-state-using-openconfig.rule](rules/check-bgp-state-using-openconfig.rule) uses OpenConfig telemetry to monitor BGP sessions state (without machine learning)  
+
+The rule HealthBot [check-bgp-routes.rule](rules/check-bgp-routes.rule) uses OpenConfig telemetry to monitor the number of BGP prefixes received per peer, and uses a static threshold (provided as a variable) (without machine learning).  
+
+The rule [check-bgp-routes-with-3-sigma.rule](rules/check-bgp-routes-with-3-sigma.rule) uses Openconfig telemetry to continuously monitor the number of bgp prefixes received, and uses **3 sigma** rule to classify the new datapoints as `normal` or `abnormal`  
+
+The rule [check-bgp-routes-with-k-means.rule](rules/check-bgp-routes-with-k-means.rule) uses Openconfig telemetry to continuously monitor the number of bgp prefixes received and uses **k-means** machine learning algorithm to classify the new datapoints as `normal` or `abnormal`  
+
+The playbook [machine-learning-for-bgp.playbook](playbooks/machine-learning-for-bgp.playbook) monitors the number of BGP prefixes received using the rules:
+- [check-bgp-state-using-openconfig](rules/check-bgp-state-using-openconfig.rule) (BGP sessions monitoring)  
+- [check-bgp-routes](rules/check-bgp-routes.rule) (static threshold without machine learning)  
+- [check-bgp-routes-with-3-sigma](rules/check-bgp-routes-with-3-sigma.rule) (dynamic threshold with 3 sigma)   
+- [check-bgp-routes-with-k-means](rules/check-bgp-routes-with-k-means.rule) (dynamic threshold with k means)   
+
+Run the script [configure_machine_learning.py](configure_machine_learning.py) to:   
+- load to Healthbot the playbook [machine-learning-for-bgp.playbook](playbooks/machine-learning-for-bgp.playbook)
+- load to Healthbot the rules [check-bgp-routes](rules/check-bgp-routes.rule) and [check-bgp-routes-with-3-sigma](rules/check-bgp-routes-with-3-sigma.rule) and [check-bgp-routes-with-k-means](rules/check-bgp-routes-with-k-means.rule) and 
+[check-bgp-state-using-openconfig](rules/check-bgp-state-using-openconfig.rule)
+- create a device-group `vmx` with devices `vMX1` to `vMX7` 
+- instanciate the playbook [machine-learning-for-bgp.playbook](playbooks/machine-learning-for-bgp.playbook) against the device-group `vmx`  
+
+```
+$ python configure_machine_learning.py
+loaded healthbot rule check-bgp-state-using-openconfig.rule
+loaded healthbot rule check-bgp-routes.rule
+loaded healthbot rule check-bgp-routes-with-k-means.rule
+loaded healthbot rule check-bgp-routes-with-3-sigma.rule
+loaded healthbot playbook machine-learning-for-bgp.playbook
+loaded healthbot configuration for the device: vMX1
+loaded healthbot configuration for the device: vMX2
+loaded healthbot configuration for the device: vMX3
+loaded healthbot configuration for the device: vMX4
+loaded healthbot configuration for the device: vMX5
+loaded healthbot configuration for the device: vMX6
+loaded healthbot configuration for the device: vMX7
+loaded healthbot configuration for the device group: vmx
+healthbot configuration commited!
+$
+```
+
+## Update the number of BGP prefixes received  
+
+To update the number of BGP prefixes received, we will use the python script [update_routes.py](https://github.com/ksator/junos_monitoring_with_healthbot/blob/master/machine_learning/update_routes.py).  
+This script uses the template [update_routes.j2](https://github.com/ksator/junos_monitoring_with_healthbot/blob/master/machine_learning/update_routes.j2).  
+It generates a junos configuration file every 60 seconds with 101 to 109 static routes (randomly), and loads this file to the Junos device vMX1 (using the replace option).  
+This junos device vMX1 uses BGP and advertises its static routes to its BGP peers.   
+Healthbot collects BGP prefixes received.  
+So when we run the python script [update_routes.py](https://github.com/ksator/junos_monitoring_with_healthbot/blob/master/machine_learning/update_routes.py), it makes the number of BGP prefixes received on vMX1 peers changing every 60 seconds  
+
+Run this command to execute the python script [update_routes.py](https://github.com/ksator/junos_monitoring_with_healthbot/blob/master/machine_learning/update_routes.py).  
+```
+$ python machine_learning/update_routes.py
+```
+Run these commands to verify: 
+```
+$ ps -ef | grep update_routes.py
+$ ls junos_monitoring_with_healthbot/machine_learning/ -la
+$ date
+```
+Run these commands on vMX1 (ip 100.123.1.0) to verify:
+```
+jcluser@vMX-addr-0> show system commit
+jcluser@vMX-addr-0> show system uptime
+jcluser@vMX-addr-0> show configuration | compare rollback 1
+jcluser@vMX-addr-0> show configuration routing-options static
+jcluser@vMX-addr-0> show route advertising-protocol bgp 192.168.1.1
+```
+Run this command on vMX1 peer (ip 100.123.1.4 as example) to see the number of BGP prefixes received 
+```
+jcluser@vMX-addr-4> show bgp summary
+```
+
+
+
