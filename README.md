@@ -226,14 +226,15 @@ $
 
 ## Update the number of BGP prefixes received  
 
-To update the number of BGP prefixes received, we will use the python script [update_routes.py](https://github.com/ksator/junos_monitoring_with_healthbot/blob/master/machine_learning/update_routes.py).  
-This script uses the template [update_routes.j2](https://github.com/ksator/junos_monitoring_with_healthbot/blob/master/machine_learning/update_routes.j2).  
-It generates a junos configuration file every 60 seconds with 101 to 109 static routes (randomly), and loads this file to the Junos device vMX1 (using the replace option).  
-This junos device vMX1 uses BGP and advertises its static routes to its BGP peers.   
-Healthbot collects BGP prefixes received.  
-So when we run the python script [update_routes.py](https://github.com/ksator/junos_monitoring_with_healthbot/blob/master/machine_learning/update_routes.py), it makes the number of BGP prefixes received on vMX1 peers changing every 60 seconds  
+To update the number of BGP prefixes received, you can use the python script [update_routes.py](update_routes.py).  
+- This script uses the template [update_routes.j2](update_routes.j2).  
+- It generates a junos configuration file every 60 seconds with 101 to 109 static routes (randomly), and loads this file to the Junos device vMX1 (using the replace option).  
 
-Run this command to execute the python script [update_routes.py](https://github.com/ksator/junos_monitoring_with_healthbot/blob/master/machine_learning/update_routes.py).  
+This junos device (vMX1) uses BGP and advertises its static routes to its BGP peers
+Healthbot collects on each devices the number of BGP prefixes received.   
+So when we run the python script [update_routes.py](update_routes.py), it makes the number of BGP prefixes received on vMX1 peers changing every 60 seconds  
+
+Run this command to execute the python script [update_routes.py]update_routes.py).  
 ```
 $ python machine_learning/update_routes.py
 ```
