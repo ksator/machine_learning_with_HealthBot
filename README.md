@@ -33,3 +33,32 @@ In HealthBot terminology:
 - outlier detection is group based. It analyzes data from a device during a learning Period vs data from other devices during the same learning period
 
 For more details, please refer to the file [machine_learning_with_HealthBot.pdf](machine_learning_with_HealthBot.pdf). 
+
+# lab description 
+
+## Building blocks   
+
+- Junos devices 
+- One Ubuntu VM (16.04) with healthbot
+
+## Management IP addresses 
+
+Here are the management ip addresses I am using in my scripts.  
+You can use less Junos devices if you want
+
+| Device        | Management IP address           |
+| ------------- |:-------------:| 
+| healthbot        | 100.123.35.0 |
+| vMX1      | 100.123.1.0 |
+| vMX2      | 100.123.1.1   |
+| vMX3      | 100.123.1.2   |
+| vMX4      | 100.123.1.3   |
+| vMX5      | 100.123.1.4   |
+| vMX6      | 100.123.1.5   |
+| vMX7      | 100.123.1.6   |
+
+## Topology
+
+You can use less Junos devices if you want
+![topology.png](resources/topology.png)  
+
