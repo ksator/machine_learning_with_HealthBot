@@ -188,16 +188,15 @@ bgp session with peer 192.168.3.6+179 is Established
 In this demo, Healthbot will: 
 - continuously monitor the number of bgp prefixes received (using Openconfig telemetry)
 - store the data collected in its database
-- process the database to build a machine learning model
-- use the machine learning model to classify the new datapoints as `normal` or `abnormal`.  
+- process the database
+  - use the `k-means for anomaly detection` algorithm and `3 sigma` rule to build two machine learning models
+  - use the machine learning models built to classify the new datapoints as `normal` or `abnormal`   
 
-The rule [check-bgp-state-using-openconfig.rule](rules/check-bgp-state-using-openconfig.rule) uses OpenConfig telemetry to monitor BGP sessions state (without machine learning)  
-
-The rule HealthBot [check-bgp-routes.rule](rules/check-bgp-routes.rule) uses OpenConfig telemetry to monitor the number of BGP prefixes received per peer, and uses a static threshold (provided as a variable) (without machine learning).  
-
-The rule [check-bgp-routes-with-3-sigma.rule](rules/check-bgp-routes-with-3-sigma.rule) uses Openconfig telemetry to continuously monitor the number of bgp prefixes received, and uses **3 sigma** rule to classify the new datapoints as `normal` or `abnormal`  
-
-The rule [check-bgp-routes-with-k-means.rule](rules/check-bgp-routes-with-k-means.rule) uses Openconfig telemetry to continuously monitor the number of bgp prefixes received and uses **k-means** machine learning algorithm to classify the new datapoints as `normal` or `abnormal`  
+The HealthBot rule:  
+- [check-bgp-state-using-openconfig.rule](rules/check-bgp-state-using-openconfig.rule) uses OpenConfig telemetry to monitor BGP sessions state (without machine learning)  
+- [check-bgp-routes.rule](rules/check-bgp-routes.rule) uses OpenConfig telemetry to monitor the number of BGP prefixes received per peer, and uses a static threshold (provided as a variable) (without machine learning).  
+- [check-bgp-routes-with-3-sigma.rule](rules/check-bgp-routes-with-3-sigma.rule) uses Openconfig telemetry to continuously monitor the number of bgp prefixes received, and uses `3 sigma` rule to classify the new datapoints as `normal` or `abnormal`  
+- [check-bgp-routes-with-k-means.rule](rules/check-bgp-routes-with-k-means.rule) uses Openconfig telemetry to continuously monitor the number of bgp prefixes received and uses `k-means for anomaly detection` machine learning algorithm to classify the new datapoints as `normal` or `abnormal`  
 
 The playbook [machine-learning-for-bgp.playbook](playbooks/machine-learning-for-bgp.playbook) monitors the number of BGP prefixes received using the rules:
 - [check-bgp-state-using-openconfig](rules/check-bgp-state-using-openconfig.rule) (BGP sessions monitoring)  
