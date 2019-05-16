@@ -41,6 +41,11 @@ For more details, please refer to the file [machine_learning_with_HealthBot.pdf]
 - Junos devices 
 - One Ubuntu VM (16.04) with healthbot
 
+## Topology
+
+You can use less Junos devices if you want
+![topology.png](resources/topology.png)  
+
 ## Management IP addresses 
 
 Here are the management ip addresses I am using in my scripts.  
@@ -56,9 +61,4 @@ You can use less Junos devices if you want
 | vMX5      | 100.123.1.4   |
 | vMX6      | 100.123.1.5   |
 | vMX7      | 100.123.1.6   |
-
-## Topology
-
-You can use less Junos devices if you want
-![topology.png](resources/topology.png)  
 
