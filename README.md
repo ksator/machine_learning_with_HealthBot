@@ -67,9 +67,5 @@ Its symbol is σ (the greek letter sigma)
 
 ## Formula 
 
-![standard-deviation.png](resources/standard-deviation.png)
 
 ## Calculate it by hand 
-
-![SD_hands.png](resources/SD_hands.png)
-
