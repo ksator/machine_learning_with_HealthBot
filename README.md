@@ -18,7 +18,7 @@ In this repository, you will find:
 You can use HealthBot to collect data from the network devices, store the data collected in its database, process the data collected.  
 Here's the HealthBot documentation https://techlibrary.juniper.net/documentation/product/en_US/contrail-healthbot 
 
-# HealthBot and machine learning 
+# About HealthBot and machine learning 
 
 HealthBot supports machine learnings for anomaly detection and for outlier detection.  
 
