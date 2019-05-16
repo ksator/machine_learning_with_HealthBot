@@ -64,3 +64,5 @@ A measure that is used to quantify the amount of variation of a set of data valu
 - A high standard deviation indicates that the data points are spread out over a wider range of values.  
 
 Its symbol is σ (the greek letter sigma)  
+
+![standard_deviation.jpg](resources/standard_deviation.jpg)  
