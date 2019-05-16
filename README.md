@@ -55,3 +55,11 @@ Example of normally distributed data: height of adults
 ![normal_distribution.jpg](resources/normal_distribution.jpg)  
 
 
+#  Standard deviation 
+
+##  Overview
+
+A measure that is used to quantify the amount of variation of a set of data values.  
+- A low standard deviation indicates that the data points tend to be close to the mean of the set.  
+- A high standard deviation indicates that the data points are spread out over a wider range of values.  
+Its symbol is σ (the greek letter sigma)  
