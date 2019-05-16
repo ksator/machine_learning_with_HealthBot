@@ -8,7 +8,10 @@ In this repository, you will find:
     - to describe machine learning usage with Healthbot  
 - The file [3sigma.xlsx](3sigma.xlsx). It computes the three-sigma rule 
 - The file [kmeans.xlsx](kmeans.xlsx). It computes one iteration of k-means with k=2  
-- Configuration examples of HealthBot using machine learning to detect anomalies.  
+- Automatiom content to configure HealthBot:
+  - Healthbot will use openconfig to collect data from Junos devices 
+  - Healthbot will store the data collected in its database
+  - Healthbot will use machine learning algorithms to detect anomaly   
 
 # About HealthBot 
 
