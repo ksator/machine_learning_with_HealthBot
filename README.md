@@ -21,7 +21,7 @@ In this repository, you will find:
 You can use HealthBot to collect data from the network devices, store the data collected in its database, process the data collected.  
 Here's the HealthBot documentation https://techlibrary.juniper.net/documentation/product/en_US/contrail-healthbot 
 
-# About HealthBot and machine learning 
+### About HealthBot and machine learning 
 
 HealthBot supports machine learnings for anomaly detection and for outlier detection.  
 
@@ -35,7 +35,7 @@ HealthBot supports the following machine learning algorithms for outlier detecti
 
 For more details, please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf). 
 
-# Anomaly detection vs outlier detection
+### Anomaly detection vs outlier detection
 
 Anomaly detection and outlier detection are both about detecting anomalies.  
 In HealthBot terminology:  
@@ -245,6 +245,10 @@ loaded healthbot configuration for the device group: vmx
 healthbot configuration commited!
 $
 ```
+
+Healthbot is now continuously monitoring the number of bgp prefixes received (using Openconfig telemetry) and storing the data collected in its database.  
+It is using the `k-means for anomaly detection` algorithm and `3 sigma` rule to build two machine learning models.  
+Once the the machine learning models are built, it will use them to classify the new datapoints as `normal` or `abnormal`   
 
 ##### Update the number of BGP prefixes received  
 
