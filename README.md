@@ -49,6 +49,7 @@ Once The machine learning model is built, it can be used to classify new data po
 Also called: Bell curve, Gaussian distribution, Gauss distribution, Laplace–Gauss distribution  
 
 A "normally distributed" data set has most of the data aggregates around its mean in a symmetric fashion. Values become less and less likely to occur the farther they are from the mean.  
+
 Think about a factory producing 1 kg bags of sugar. They won’t always make each exactly 1 kg. In reality, the bags are around 1 kg. Most of the time they will be very close to 1 kg, and very rarely far from 1 Kg.  
 
 Example of normally distributed data: height of adults  
@@ -72,4 +73,31 @@ Its symbol is σ (the greek letter sigma)
 ## Calculate it by hand 
   
 ![SD_hands.png](resources/SD_hands.png)  
+
+# Variance
+
+## Overview 
+
+As indicated above, the Standard Deviation is a measure of how spread out numbers are.  
+Think about the average difference around the mean.  
+The standard deviation is the square root of the variance.  
+As example: if SD = 3, variance = 9  
+The variance is the average of the squared differences from the Mean.
+
+## Calculate it by hand 
+
+![variance_hands.png](resources/variance_hands.png)  
+
+# 68–95–99.7 rule 
+
+With a normal data set (normally distributed) (as example: height of adults):
+- 68.27% of the values of the data set are in a band of two standard deviations around the mean  
+(mean - 1 standard deviation <-> mean + 1 standard deviation) 
+-	95% of the values of the data set are in a band of four standard deviations around the mean  
+(mean - 2 standard deviations <-> mean + 2 standard deviations)
+-	99.7% of the values of the data set are in a band of six standard deviations around the mean  
+(mean - 3 standard deviations <-> mean + 3 standard deviations)
+
+![68–95–99.7-rule.png](resources/68–95–99.7-rule.png)  
+
 
