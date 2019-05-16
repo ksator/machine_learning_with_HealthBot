@@ -44,6 +44,7 @@ For more details, please refer to the file [machine_learning_with_HealthBot.pdf]
 
 # lab topology
 
+Here's the lab topology I am using.  
 You can use less Junos devices if you want
 ![topology.png](resources/topology.png)  
 
