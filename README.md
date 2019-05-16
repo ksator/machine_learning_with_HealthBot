@@ -44,14 +44,14 @@ For more details, please refer to the file [machine_learning_with_HealthBot.pdf]
 
 # lab topology
 
-Here's the lab topology I am using.  
+Here's the lab topology I am using (spines and leaves).    
 You can use less Junos devices if you want
 ![topology.png](resources/topology.png)  
 
 # lab management IP addresses 
 
 Here are the management ip addresses I am using in my scripts.  
-If you are using other ip addresses, you need to update the automation content to match your ip addresses  
+If you are using other ip addresses, you need to update the automation content to use your ip addresses  
 
 You can use less Junos devices if you want
 
@@ -74,9 +74,9 @@ Starting with Junos OS Release 18.3R1:
 - the Junos OS image includes the ```OpenConfig``` package; therefore, you do not need anymore to install ```OpenConfig``` separately on your device.  
 - the Junos OS image includes the ```Network Agent```, therefore, you do not need anymore to install the ```network agent``` separately on your device.  
 
-If your setup is using an older Junos release, it is required to install these two packages.  
-Download these two packages from Juniper website and save them in your local directory.    
-Execute the python script [upgrade_junos.py](upgrade_junos.py) to add these two packages to the Junos devices indicated in this [inventory.yml](inventory.yml) file   
+If your setup is using an older Junos release, it is required to install these two packages:    
+- Download these two packages from Juniper website and save them in your local directory.    
+- Execute the python script [upgrade_junos.py](upgrade_junos.py) to add these two packages to the Junos devices indicated in this [inventory.yml](inventory.yml) file   
 
 Install the requirements:
 ```
@@ -115,10 +115,10 @@ This script uses:
 - the template [junos.j2](configure_junos/junos.j2) 
 - the variables [junos.yml](configure_junos/junos.yml) 
 
-It: 
+This script: 
 - generates a junos configuration file for each device indicated in the [inventory.yml](inventory.yml) file
-- save the generated configuration files in the directory [configure_junos](configure_junos) 
-- load the junos configuration files on the devices  
+- saves the generated configuration files in the directory [configure_junos](configure_junos) 
+- loads the junos configuration files on the devices  
  
 Install the requirements: 
 ```
