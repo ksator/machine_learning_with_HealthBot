@@ -34,19 +34,17 @@ In HealthBot terminology:
 
 For more details, please refer to the file [machine_learning_with_HealthBot.pdf](machine_learning_with_HealthBot.pdf). 
 
-# lab description 
-
-## Building blocks   
+# lab building blocks   
 
 - Junos devices 
 - One Ubuntu VM (16.04) with healthbot
 
-## Topology
+# lab topology
 
 You can use less Junos devices if you want
 ![topology.png](resources/topology.png)  
 
-## Management IP addresses 
+# lab management IP addresses 
 
 Here are the management ip addresses I am using in my scripts.  
 You can use less Junos devices if you want
@@ -62,3 +60,118 @@ You can use less Junos devices if you want
 | vMX6      | 100.123.1.5   |
 | vMX7      | 100.123.1.6   |
 
+# Junos packages
+
+In order to collect data from Junos using openconfig telemetry, the devices require the Junos packages ```openconfig``` and ```network agent```
+
+Starting with Junos OS Release 18.3R1: 
+- the Junos OS image includes the ```OpenConfig``` package; therefore, you do not need anymore to install ```OpenConfig``` separately on your device.  
+- the Junos OS image includes the ```Network Agent```, therefore, you do not need anymore to install the ```network agent``` separately on your device.  
+
+This setup is using an older Junos release, so it is required to install these two packages. 
+
+Download these two packages from Juniper website and save them in your local directory.    
+
+Execute the python script [upgrade_junos.py](upgrade_junos.py) to add these two packages to the Junos devices indicated in this [inventory.yml](inventory.yml) file   
+
+Install the requirements:
+```
+$ sudo apt install python-pip
+$ pip install junos-eznc
+```
+Update the devices inventory: 
+```
+$ vi inventory.yml
+```
+Run this command to execute the python script [upgrade_junos.py](upgrade_junos.py)
+```
+$ python ./upgrade_junos.py
+```
+ssh to a Junos device and verify it uses these packages:
+```
+jcluser@vMX1> file list
+
+/var/home/jcluser/:
+junos-openconfig-x86-32-0.0.0.10-1.tgz
+network-agent-x86-32-18.2R1-S3.2-C1.tgz
+
+```
+```
+jcluser@vMX1> show version | match "Junos:|openconfig|na telemetry"
+Junos: 18.2R1.9
+JUNOS na telemetry [18.2R1-S3.2-C1]
+JUNOS Openconfig [0.0.0.10-1]
+```
+
+# Junos configuration
+
+we will the python script [configure_junos.py](configure_junos.py) to configure the lab.
+
+This script uses: 
+- the template [junos.j2](configure_junos/junos.j2) 
+- the variables [junos.yml](configure_junos/junos.yml) 
+
+It generates the junos configuration for each device in the [inventory.yml](inventory.yml) file and load the junos configuration on devices.  
+ 
+Install the requirements: 
+```
+$ sudo apt install python-pip
+$ pip install junos-eznc
+$ pip install jinja2
+```
+Run this command to update the devices inventory file:
+```
+$ vi inventory.yml
+```
+Run this command to configure the lab:  
+```
+$ python configure_junos.py
+configured device vMX1
+configured device vMX2
+configured device vMX3
+configured device vMX4
+configured device vMX5
+configured device vMX6
+configured device vMX7
+```
+The generated junos configuration files are saved in the directory [configure_junos](configure_junos).  
+```
+$ ls configure_junos
+```
+ssh to a junos device and check bgp sessions state. The sessions should be established.  
+To audit BGP sessions using Python, run this command: 
+```
+$ python audit_junos.py
+vMX1
+bgp session with peer 192.168.1.1+179 is Established
+bgp session with peer 192.168.1.3+179 is Established
+bgp session with peer 192.168.1.5+179 is Established
+bgp session with peer 192.168.1.7+61628 is Established
+vMX2
+bgp session with peer 192.168.2.1+179 is Established
+bgp session with peer 192.168.2.3+179 is Established
+bgp session with peer 192.168.2.5+179 is Established
+bgp session with peer 192.168.2.7+179 is Established
+vMX3
+bgp session with peer 192.168.3.1+179 is Established
+bgp session with peer 192.168.3.3+64639 is Established
+bgp session with peer 192.168.3.5+179 is Established
+bgp session with peer 192.168.3.7+61672 is Established
+vMX4
+bgp session with peer 192.168.1.0+55338 is Established
+bgp session with peer 192.168.2.0+63710 is Established
+bgp session with peer 192.168.3.0+55353 is Established
+vMX5
+bgp session with peer 192.168.1.2+57685 is Established
+bgp session with peer 192.168.2.2+61875 is Established
+bgp session with peer 192.168.3.2+179 is Established
+vMX6
+bgp session with peer 192.168.1.4+55251 is Established
+bgp session with peer 192.168.2.4+58983 is Established
+bgp session with peer 192.168.3.4+53866 is Established
+vMX7
+bgp session with peer 192.168.1.6+179 is Established
+bgp session with peer 192.168.2.6+59682 is Established
+bgp session with peer 192.168.3.6+179 is Established
+
+```
