@@ -1,4 +1,23 @@
-# About this repository 
+# Machine learning with HealthBot
+
+- [About this repository](#about-this-repository)  
+- [machine learning 101](#machine-learning-101)  
+- [HealthBot](#healthbot)  
+  - [Overview](#overview)  
+  - [HealthBot and machine learning](#about-healthBot-and-machine-learning)  
+- [Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)](#machine-learning-for-anomaly-detection-demo-demo-with-the-number-of-bgp-prefixes-received)  
+  - [Demo overview](#demo-overview)  
+  - [requirements](#requirements)  
+  - [lab building blocks](#lab-building-blocks)  
+  - [lab topology](#lab-topology)  
+  - [lab management IP addresses](#lab-management-ip-addresses)  
+  - [Junos packages](#junos-packages)
+  - [Junos configuration](#junos-configuration)  
+  - [HealthBot configuration](#healthbot-configuration)  
+  - [Update the number of BGP prefixes received](#update-the-number-of-bgp-prefixes-received)  
+  
+  
+## About this repository 
 
 Using HealthBot, it is easy to: 
 - collect data from the network devices 
@@ -16,12 +35,19 @@ In this repository, you will find:
   - store the data collected in its database
   - process the data collected and use machine learning algorithms to detect anomaly   
 
-# About HealthBot 
+## Machine learning 101
 
+The file [machine_learning_101.pdf](machine_learning_101.pdf): 
+    - helps peoples with no machine learning background to better understand machine learning basics 
+    - describes machine learning usage with Healthbot  
+    
+## HealthBot 
+
+### Overview 
 You can use HealthBot to collect data from the network devices, store the data collected in its database, process the data collected.  
 Here's the HealthBot documentation https://techlibrary.juniper.net/documentation/product/en_US/contrail-healthbot 
 
-### About HealthBot and machine learning 
+### HealthBot and machine learning 
 
 HealthBot supports machine learnings for anomaly detection and for outlier detection.  
 
@@ -33,10 +59,6 @@ HealthBot supports the following machine learning algorithms for outlier detecti
 - DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
 - K-fold Three-sigma ("K-Fold Cross-Validation" using "Three-sigma")
 
-For more details, please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf). 
-
-### Anomaly detection vs outlier detection
-
 Anomaly detection and outlier detection are both about detecting anomalies.  
 In HealthBot terminology:  
 - anomaly detection is time based. It compares new data points from a device vs data points collected from the same device during a learning period.  
@@ -44,7 +66,29 @@ In HealthBot terminology:
 
 For more details, please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf). 
 
-# Machine learning demo
+## Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)
+
+### Demo overview 
+
+In this demo, Healthbot will: 
+- continuously monitor on Junos devices the number of bgp prefixes received (using Openconfig telemetry)
+- store the data collected in its database
+- process the database
+  - use the `k-means for anomaly detection` algorithm and `3 sigma` rule to build two machine learning models
+  - use the machine learning models built to classify the new datapoints as `normal` or `abnormal`   
+
+### requirements
+
+clone the repository
+```
+$ git clone https://github.com/ksator/machine_learning_with_HealthBot.git
+$ cd machine_learning_with_HealthBot
+```
+Install the requirements on Ubuntu
+```
+$ sudo apt install python-pip
+$ pip install --upgrade -r requirements.txt
+```
 
 ### lab building blocks   
 
@@ -87,11 +131,6 @@ If your setup is using an older Junos release, it is required to install these t
 - Download these two packages from Juniper website and save them in your local directory.    
 - Execute the python script [upgrade_junos.py](upgrade_junos.py) to add these two packages to the Junos devices indicated in this [inventory.yml](inventory.yml) file   
 
-Install the requirements:
-```
-$ sudo apt install python-pip
-$ pip install junos-eznc
-```
 Update the devices inventory: 
 ```
 $ vi inventory.yml
@@ -129,12 +168,6 @@ This script:
 - saves the generated configuration files in the directory [configure_junos](configure_junos) 
 - loads the junos configuration files on the devices  
  
-Install the requirements: 
-```
-$ sudo apt install python-pip
-$ pip install junos-eznc
-$ pip install jinja2
-```
 Run this command to update the devices inventory file:
 ```
 $ vi inventory.yml
@@ -189,21 +222,9 @@ vMX7
 bgp session with peer 192.168.1.6+179 is Established
 bgp session with peer 192.168.2.6+59682 is Established
 bgp session with peer 192.168.3.6+179 is Established
-
 ```
 
-### Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)
-
-##### Demo overview 
-
-In this demo, Healthbot will: 
-- continuously monitor the number of bgp prefixes received (using Openconfig telemetry)
-- store the data collected in its database
-- process the database
-  - use the `k-means for anomaly detection` algorithm and `3 sigma` rule to build two machine learning models
-  - use the machine learning models built to classify the new datapoints as `normal` or `abnormal`   
-
-##### HealthBot configuration 
+### HealthBot configuration 
 
 The HealthBot rule:  
 - [check-bgp-state-using-openconfig.rule](rules/check-bgp-state-using-openconfig.rule) uses OpenConfig telemetry to monitor BGP sessions state (without machine learning)  
@@ -250,7 +271,7 @@ Healthbot is now continuously monitoring the number of bgp prefixes received (us
 It is using the `k-means for anomaly detection` algorithm and `3 sigma` rule to build two machine learning models.  
 Once the the machine learning models are built, it will use them to classify the new datapoints as `normal` or `abnormal`   
 
-##### Update the number of BGP prefixes received  
+### Update the number of BGP prefixes received  
 
 Healthbot is collecting on each devices the number of BGP prefixes received.   
 
