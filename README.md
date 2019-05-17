@@ -38,8 +38,8 @@ In this repository, you will find:
 # Machine learning 101
 
 The file [machine_learning_101.pdf](machine_learning_101.pdf): 
-    - helps peoples with no machine learning background to better understand machine learning basics 
-    - describes machine learning usage with Healthbot  
+  - helps peoples with no machine learning background to better understand machine learning basics 
+  - describes machine learning usage with Healthbot  
     
 # HealthBot 
 
