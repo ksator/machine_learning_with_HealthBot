@@ -4,7 +4,7 @@
 - [machine learning 101](#machine-learning-101)  
 - [HealthBot](#healthbot)  
   - [Overview](#overview)  
-  - [HealthBot and machine learning](#about-healthbot-and-machine-learning)  
+  - [HealthBot and machine learning](#healthbot-and-machine-learning)  
 - [Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)](#machine-learning-for-anomaly-detection-demo-demo-with-the-number-of-bgp-prefixes-received)  
   - [Demo overview](#demo-overview)  
   - [requirements](#requirements)  
