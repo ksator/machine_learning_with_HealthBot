@@ -110,7 +110,7 @@ You can use less Junos devices if you want
 ## lab management IP addresses 
 
 Here are the management ip addresses I am using in my scripts.  
-If you are using other ip addresses, you need to update the automation content to use your ip addresses  
+If you are using other ip addresses, you need to update the file [inventory.yml](inventory.yml) to use your ip addresses  
 
 You can use less Junos devices if you want
 
