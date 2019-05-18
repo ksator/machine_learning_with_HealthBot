@@ -25,12 +25,16 @@ Using HealthBot, it is easy to:
 - use machine learning for anomaly detection or outlier detection    
 
 In this repository, you will find: 
-- The file [machine_learning_101.pdf](machine_learning_101.pdf). The purpose of this document is to:  
+- The file [machine_learning_101.pdf](machine_learning_101.pdf)  
+  The purpose of this document is to:  
     - help peoples with no machine learning background to better understand machine learning basics 
     - describe machine learning usage with Healthbot  
-- The file [3sigma.xlsx](3sigma.xlsx). It computes the three-sigma rule 
-- The file [kmeans.xlsx](kmeans.xlsx). It computes one iteration of k-means with k=2  
-- Automation content to configure HealthBot. Healthbot will: 
+- The file [3sigma.xlsx](3sigma.xlsx)   
+  It computes the three-sigma rule 
+- The file [kmeans.xlsx](kmeans.xlsx)  
+  It computes one iteration of k-means with k=2  
+- Automation content to configure HealthBot.  
+  Healthbot will: 
   - use openconfig to collect data from Junos devices 
   - store the data collected in its database
   - process the data collected and use machine learning algorithms to detect anomaly   
@@ -61,8 +65,10 @@ HealthBot supports the following machine learning algorithms for outlier detecti
 
 Anomaly detection and outlier detection are both about detecting anomalies.  
 In HealthBot terminology:  
-- anomaly detection is time based. It compares new data points from a device vs data points collected from the same device during a learning period.  
-- outlier detection is group based. It analyzes data from a device during a learning Period vs data from other devices during the same learning period
+- anomaly detection is time based.  
+  It compares new data points from a device vs data points collected from the same device during a learning period.  
+- outlier detection is group based.  
+  It analyzes data from a device during a learning Period vs data from other devices during the same learning period
 
 For more details, please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf). 
 
