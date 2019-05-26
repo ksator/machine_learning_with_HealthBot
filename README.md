@@ -84,11 +84,15 @@ pip3 install sklearn
 
 ## scikit-learn demo
 
-Load and return the iris dataset
+### Load the iris dataset
+
 ```
 >>> from sklearn.datasets import load_iris
 >>> iris=load_iris()
 ```
+
+### Examine the iris dataset
+
 it returned a dictionary. 
 
 feature_names attribute
@@ -275,6 +279,8 @@ Let’s say you are interested in the samples 10, 25, and 50
 >>> iris.target[[10, 25, 50]]
 array([0, 0, 1])
 ```
+### split randomly the iris data set into a train and a test subset  
+
 X has the data to learn and Y the target
 ```
 >>> X = iris.data
