@@ -7,6 +7,7 @@
   - [Unsupervised learning](#unsupervised-learning)
   - [Clustering](#clustering)   
   - [Classification](#classification)    
+  - [k-Fold Cross-Validation (CV)](#k-fold_cross-validation_CV)
   - [data set](#data-set)  
   - [scikit-learn python library](#scikit-learn-python-library)  
   - [scikit-learn requirements](#scikit-learn-requirements)  
@@ -19,6 +20,7 @@
       - [Select an algorithm](#select-an-algorithm)
       - [Fit the model](#fit-the-model)
       - [Evaluate the trained model performance](#evaluate-the-trained-model-performance)
+      - [Use k-Fold Cross-Validation to better evaluate the trained model performance](#use-k-Fold-cross-validation-to-better-evaluate-the-trained-model-performance)
 - [HealthBot](#healthbot)  
   - [Overview](#overview)  
   - [HealthBot and machine learning](#healthbot-and-machine-learning)  
@@ -95,6 +97,33 @@ Takes as input a training set and output a classifier which predict the class fo
 Classification uses supervised learning.  
 The machine learning algorithm learns on a labeled dataset  
 We know the labels from the training set 
+
+## k-Fold Cross-Validation (CV)
+
+CV can be used to test a model. It helps to estimate the model performance.  
+It gives an indication of how well the model generalizes to unseen data.  
+CV uses a single parameter called k.  
+It works like this:  
+it splits the dataset into k groups.  
+For each unique group:
+- Take the group as a test data set
+- Take the remaining groups as a training data set
+- Use the on the training set to build the model, and then use the test set and evaluate
+Example:
+A dataset 6 datapoints: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]  
+The first step is to pick a value for k in order to determine the number of folds used to split the dataset.  
+Here, we will use a value of k=3.  
+so we split the dataset into 3 groups.  
+each group will have an equal number of 2 observations.
+
+For example:  
+Fold1: [0.5, 0.2]  
+Fold2: [0.1, 0.3]  
+Fold3: [0.4, 0.6]  
+Three models are built and evaluated.  
+Model1: Trained on Fold1 + Fold2, Tested on Fold3  
+Model2: Trained on Fold2 + Fold3, Tested on Fold1  
+Model3: Trained on Fold1 + Fold3, Tested on Fold2  
 
 ##  data set  
 
@@ -633,6 +662,53 @@ and
 >>> accuracy_score(y_test,y_pred)
 0.9733333333333334
 >>> 
+```
+
+#### Use k-Fold Cross-Validation to better evaluate the trained model performance 
+
+we will use this example [k_fold_cross_validation.py](iris_flowers_classification/k_fold_cross_validation.py)  
+```
+>>> from sklearn.model_selection import cross_val_score
+>>> from sklearn import datasets
+>>> from sklearn.model_selection import train_test_split
+>>> from sklearn.metrics import accuracy_score
+>>> from sklearn.svm import SVC
+```
+load the data set 
+```
+>>> iris = datasets.load_iris()
+>>> X = iris.data
+>>> y = iris.target
+```
+split the data set in a training set and a test set
+```
+>>> X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
+```
+select a model and fit it
+```
+>>> svc_clf = SVC(kernel = 'linear')
+>>> svc_clf.fit(X_train, y_train)
+```
+use 10 fold cross validation to evaluate the trained model 
+```
+>>> svc_scores = cross_val_score(svc_clf, X_train, y_train, cv=10)
+```
+SVC 10 fold cross validation score
+```
+>>> svc_scores
+array([1.        , 0.83333333, 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ])
+>>> 
+```
+SVC 10 fold cross validation mean
+```
+>>> svc_scores.mean()
+0.9833333333333334
+```
+SVC 10 fold cross validation standart devaiation
+```
+>>> svc_scores.std()
+0.04999999999999999
 ```
 
 # HealthBot 
