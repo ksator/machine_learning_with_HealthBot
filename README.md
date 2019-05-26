@@ -2,14 +2,16 @@
 
 - [About this repository](#about-this-repository)  
 - [machine learning 101](#machine-learning-101)  
-- [Machine learning hello world demo with Python (demo with iris flowers classification)](#machine-learning-hello-world-demo-with-python-demo-with-iris-flowers-classification)  
-  - [Classification](#classification)  
-  - [Supervised learning](#supervised-learning)  
+- [Machine learning hello world demo with Python (demo with iris flowers classification)](#machine-learning-hello-world-demo-with-python-demo-with-iris-flowers-classification)
+  - [Supervised learning](#supervised-learning)
+  - [Unsupervised learning](#unsupervised-learning)
+  - [Clustering](#clustering)   
+  - [Classification](#classification)    
   - [data set](#data-set)  
   - [scikit-learn python library](#scikit-learn-python-library)  
   - [scikit-learn requirements](#scikit-learn-requirements)  
   - [scikit-learn installation](#scikit-learn-installation)  
-  - [scikit-learn demo](#scikit-learn-demo)
+  - [demo](#demo)
     - [Load the dataset](#load-the-dataset)
     - [Examine the dataset](#examine-the-dataset)
     - [measure the performance of prediction](#measure-the-performance-of-prediction)
@@ -65,21 +67,38 @@ The file [machine_learning_101.pdf](machine_learning_101.pdf):
 
 Please read first the file [machine_learning_101.pdf](machine_learning_101.pdf)  
 
+## Supervised learning  
+
+The machine learning algorithm learns on a labeled dataset
+
+## Unsupervised learning
+
+The machine learning uses unlabeled dataset.
+
+## Clustering
+
+Clustering uses unsupervised learning.  
+Clustering creates regions in space without being given any labels.  
+Clustering divides the data points into groups, such that data points in the same group are more similar to other data points in the same group and dissimilar to the data points in other groups.  Groups are basically a collection of data points based on their similarity  
+
+k-means clustering and DBSCAN are unsupervised clustering machine learning algorithms.
+They group the data that has not been previously labelled, classified or categorized.
+
 ## Classification 
 
 Classification categorizes data points into the desired class.  
 There is a distinct number of classes.  
 Classes are sometimes called targets, labels or categories    
 
-Takes as input a training set and output a classifier which predict the class for any new data point 
+Takes as input a training set and output a classifier which predict the class for any new data point  
 
-## Supervised learning  
-
-The machine learning algorithm learns on a labeled dataset
+Classification uses supervised learning.  
+The machine learning algorithm learns on a labeled dataset  
+We know the labels from the training set 
 
 ##  data set  
 
-We will use the iris data set.    
+We will use the iris flowers data set.    
 It has data to quantify the morphologic variation of Iris flowers of three related species.  
 The iris dataset consists of measurements of three types of Iris flowers: Iris Setosa, Iris Versicolor, and Iris Virginica.  
 
@@ -110,7 +129,7 @@ sklearn requires python 3
 pip3 install sklearn
 ```
 
-## scikit-learn demo
+## demo
 
 ### Load the dataset
 
@@ -542,7 +561,8 @@ array([2, 0, 2, 1, 1, 1, 1, 0, 2, 0, 2, 2, 1, 2, 2, 1, 2, 0, 1, 2, 1, 0,
 Support vector machines (SVM) is a set of supervised learning methods.  
 Support vector classifier (SVC) is a python class capable of performing classification on a dataset.  
 
-We will use SVC to: 
+We will use SVC.  
+This classifier will: 
 - Find a linear separator. A line separating classes. A line separating (classifying) Iris setosa from Iris virginica from Iris versicolor.
 - There are many linear separators: It will choose the optimal one, i.e the one that maximizes our confidence, i.e the one that maximizes the geometrical margin, i.e the one that maximizes the distance between itself and the closest/nearest data point point
 
