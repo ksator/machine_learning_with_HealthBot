@@ -3,6 +3,8 @@
 - [About this repository](#about-this-repository)  
 - [machine learning 101](#machine-learning-101)  
 - [Machine learning hello world demo with Python](#machine-learning-hello-world-demo-with-python)  
+  - [Classification](#classification)  
+  - [Supervised learning](#supervised-learning)  
   - [Iris flower data set](#iris-flower-data-set)  
   - [scikit-learn python library](#scikit-learn-python-library)  
   - [scikit-learn requirements](#scikit-learn-requirements)  
@@ -63,6 +65,10 @@ Classes are sometimes called targets, labels or categories
 
 Takes as input a training set and output a classifier which predict the class for any new data point 
 
+## Supervised learning  
+
+The machine learning algorithm learns on a labeled dataset
+
 ##  Iris flower data set  
 
 It has data to quantify the morphologic variation of Iris flowers of three related species.  
@@ -103,7 +109,7 @@ pip3 install sklearn
 >>> from sklearn.datasets import load_iris
 >>> iris=load_iris()
 ```
-it returned a kind of dictionary. 
+it returns a kind of dictionary. 
 
 ### Examine the iris dataset
 
@@ -318,6 +324,7 @@ Let’s say you are interested in the samples 10, 25, and 50
 >>> iris.target[[10, 25, 50]]
 array([0, 0, 1])
 ```
+
 ### measure the performance of prediction 
 
 To measure the performance of prediction, we will split the dataset into training and test sets.  
