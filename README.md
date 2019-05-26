@@ -2,7 +2,7 @@
 
 - [About this repository](#about-this-repository)  
 - [machine learning 101](#machine-learning-101)  
-- [Machine learning hello world demo with Python (demo with iris flowers](#machine-learning-hello-world-demo-with-python-demo-with-iris-flowers)  
+- [Machine learning hello world demo with Python (demo with iris flowers classification)](#machine-learning-hello-world-demo-with-python-demo-with-iris-flowers-classification)  
   - [Classification](#classification)  
   - [Supervised learning](#supervised-learning)  
   - [data set](#data-set)  
@@ -48,6 +48,7 @@ In this repository, you will find:
   It computes the three-sigma rule 
 - The file [kmeans.xlsx](kmeans.xlsx)  
   It computes one iteration of k-means with k=2  
+- A machine learning hello world demo with python (about iris flowers classification)   
 - Automation content to configure HealthBot.  
   Healthbot will: 
   - use openconfig to collect data from Junos devices 
@@ -60,7 +61,7 @@ The file [machine_learning_101.pdf](machine_learning_101.pdf):
   - helps peoples with no machine learning background to better understand machine learning basics 
   - describes machine learning usage with Healthbot  
     
-# Machine learning hello world demo with Python (demo with iris flowers)  
+# Machine learning hello world demo with Python (demo with iris flowers classification)  
 
 Please read first the file [machine_learning_101.pdf](machine_learning_101.pdf)  
 
@@ -78,6 +79,7 @@ The machine learning algorithm learns on a labeled dataset
 
 ##  data set  
 
+We will use the iris data set.    
 It has data to quantify the morphologic variation of Iris flowers of three related species.  
 The iris dataset consists of measurements of three types of Iris flowers: Iris Setosa, Iris Versicolor, and Iris Virginica.  
 
@@ -586,7 +588,7 @@ array([1, 2, 0, 0, 2, 2, 1, 0, 1, 1, 0, 0, 2, 2, 1, 2, 1, 1, 2, 1, 1, 1,
        1, 2, 1, 1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 0, 2, 0, 1, 0, 1, 2, 2,
        0, 1, 2, 1, 1, 0, 0, 0, 1])
 ```
-There is two mismatches
+There are two mismatches
 ```
 >>> y_pred[0]
 2
@@ -602,7 +604,7 @@ and
 1
 >>> 
 ```
-75 samples, 2 mismatches, so 0.97% accuracy  
+75 samples, 2 mismatches, so 0.97333% accuracy  
 ```
 >>> from sklearn.metrics import accuracy_score
 >>> accuracy_score(y_test,y_pred)
