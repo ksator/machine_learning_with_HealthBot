@@ -5,8 +5,8 @@
 - [Machine learning hello world demo with Python](#machine-learning-hello-world-demo-with-python)  
   - [Iris flower data set](#iris-flower-data-set)  
   - [About scikit-learn python library](#about-scikit-learn-python-library)  
-  - [Requirements](#requirements)  
-  - [installation](#installation)  
+  - [scikit-learn requirements](#scikit-learn-requirements)  
+  - [scikit-learn installation](#scikit-learn-installation)  
   - [scikit-learn demo](#scikit-learn-demo)  
 - [HealthBot](#healthbot)  
   - [Overview](#overview)  
@@ -74,10 +74,10 @@ Dimensionality: 4
 Scikit-Learn, also known as sklearn, is Python general-purpose machine learning library  
 Scikit-Learn is very versatile. 
 
-## Requirements 
+## scikit-learn requirements 
 sklearn requires python 3  
 
-## installation  
+## scikit-learn installation  
 ```
 pip3 install sklearn
 ```
