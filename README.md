@@ -39,8 +39,9 @@ In this repository, you will find:
 # Machine learning 101
 
 The file [machine_learning_101.pdf](machine_learning_101.pdf) helps peoples with no machine learning background to better understand machine learning basics  
-Please read this file first. 
-    
+It also help to understand Heathbot support of machine learning   
+Please read this file first  
+
 # HealthBot 
 
 ## Overview 
@@ -50,10 +51,11 @@ Here's the HealthBot documentation https://techlibrary.juniper.net/documentation
 
 ## HealthBot and machine learning support
 
-The file [machine_learning_101.pdf](machine_learning_101.pdf) helps peoples with no machine learning background to better understand machine learning basics.  
-Please read this file first. 
+HealthBot supports machine learnings for anomaly detection and for outlier detection.  
 
-HealthBot supports machine learnings for anomaly detection and for outlier detection.
+Please read first the file [machine_learning_101.pdf](machine_learning_101.pdf).  
+It helps peoples with no machine learning background to better understand machine learning basics.   
+It also help to understand Heathbot support of machine learning   
 
 ### anomaly detection
 
