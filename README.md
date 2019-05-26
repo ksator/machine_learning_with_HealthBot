@@ -16,7 +16,6 @@
   - [HealthBot configuration](#healthbot-configuration)  
   - [Update the number of BGP prefixes received](#update-the-number-of-bgp-prefixes-received)  
   
-  
 ## About this repository 
 
 Using HealthBot, it is easy to: 
@@ -26,42 +25,51 @@ Using HealthBot, it is easy to:
 
 In this repository, you will find: 
 - The file [machine_learning_101.pdf](machine_learning_101.pdf)  
-  The purpose of this document is to:  
-    - help peoples with no machine learning background to better understand machine learning basics 
-    - describe machine learning usage with Healthbot  
-- The file [3sigma.xlsx](3sigma.xlsx)   
-  It computes the three-sigma rule 
-- The file [kmeans.xlsx](kmeans.xlsx)  
-  It computes one iteration of k-means with k=2  
+  The purpose of this document is to help peoples with no machine learning background to better understand machine learning basics 
 - Automation content to configure HealthBot.  
   Healthbot will: 
   - use openconfig to collect data from Junos devices 
   - store the data collected in its database
   - process the data collected and use machine learning algorithms to detect anomaly   
+- The file [3sigma.xlsx](3sigma.xlsx)   
+  It computes the three-sigma rule 
+- The file [kmeans.xlsx](kmeans.xlsx)  
+  It computes one iteration of k-means with k=2  
 
 # Machine learning 101
 
-The file [machine_learning_101.pdf](machine_learning_101.pdf): 
-  - helps peoples with no machine learning background to better understand machine learning basics 
-  - describes machine learning usage with Healthbot  
+The file [machine_learning_101.pdf](machine_learning_101.pdf) helps peoples with no machine learning background to better understand machine learning basics  
+Please read this file first. 
     
 # HealthBot 
 
 ## Overview 
+
 You can use HealthBot to collect data from the network devices, store the data collected in its database, process the data collected.  
 Here's the HealthBot documentation https://techlibrary.juniper.net/documentation/product/en_US/contrail-healthbot 
 
-## HealthBot and machine learning 
+## HealthBot and machine learning support
 
-HealthBot supports machine learnings for anomaly detection and for outlier detection.  
+The file [machine_learning_101.pdf](machine_learning_101.pdf) helps peoples with no machine learning background to better understand machine learning basics.  
+Please read this file first. 
+
+HealthBot supports machine learnings for anomaly detection and for outlier detection.
+
+### anomaly detection
 
 HealthBot supports the following machine learning algorithms for anomaly detection:  
 - Three-sigma rule  
 - k-means for anomaly detection  
 
+### outlier detection
+
 HealthBot supports the following machine learning algorithms for outlier detection: 
 - DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
 - K-fold Three-sigma ("K-Fold Cross-Validation" using "Three-sigma")
+
+### anomaly detection vs outlier detection
+
+HealthBot supports machine learnings for anomaly detection and for outlier detection.  
 
 Anomaly detection and outlier detection are both about detecting anomalies.  
 In HealthBot terminology:  
@@ -70,7 +78,139 @@ In HealthBot terminology:
 - outlier detection is group based.  
   It analyzes data from a device during a learning Period vs data from other devices during the same learning period
 
-For more details, please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf). 
+### three-sigma rule 
+
+#### Overview
+
+sigma is the greek letter σ. This is also the Standard Deviation symbol  
+HealthBot uses 3-sigma rule for anomaly detection.  
+Three-sigma rule classifies a new data point as "normal" if it is between the (mean – 3 * standard deviations) and (mean + 3 * standard deviations)  
+Three-sigma rule classifies a new data point as "abnormal" if it is outside this range.  
+
+mean:  mean of the data set  
+SD: standard deviation of the data set  
+abs: absolute value  
+x: a new data point  
+If abs(x - mean) > (3 * SD) then tree-sigma classifies x as abnormal  
+If abs(x - mean) < (3 * SD) then tree-sigma classifies x as normal  
+
+#### Calculate it by hand  
+
+Data points = 101, 102, 106, 107  
+Mean = (101 +102 + 106 + 107)/4=104  
+((101-104)^2 + (102-104)^2 + (106-104)^2 + (107-104)^2)/4 = (9 + 4 + 4 + 9)/4 = 6.5  
+standard deviation = √6.5 = 2.54  
+3 * standard deviation = 7.62  
+mean – 3 * standard deviation = 96.38  
+mean + 3 * standard deviation = 111.62  
+Three-sigma rule classifies a new data point as “normal” if it is between 96.38 and 111.62  
+Three-sigma rule classifies a new data point as “abnormal” if it is outside this range    
+
+#### HealthBot rule example  
+
+HealthBot rule using OpenConfig telemetry to monitor the number of BGP prefixes received per peer, and using a dynamic threshold computed by three-sigma to detect anomaly: https://github.com/ksator/machine_learning_with_HealthBot/blob/master/rules/check-bgp-routes-with-3-sigma.rule  
+
+### k-means for anomaly detection
+
+#### Overview 
+
+"k-means clustering" and "k-means for anomaly detection" are two different things.  
+
+"k-means clustering" splits n data points into k clusters.  
+
+"k-means for anomaly detection" uses "k-means clustering" and others building blocks as well to identify "abnormal" data points (data points significantly different from the majority of the data).   
+
+HealthBot uses "k-means for anomaly detection" to build a model and to classify new data points as normal or abnormal.  
+
+#### HealthBot rule example
+
+HealthBot rule using OpenConfig telemetry to monitor the number of BGP prefixes received per peer, and using a dynamic threshold computed by k-means to detect anomaly: https://github.com/ksator/machine_learning_with_HealthBot/blob/master/rules/check-bgp-routes-with-k-means.rule  
+
+### K-fold Three-sigma  
+
+"K-fold Three-sigma" is "k-Fold Cross-Validation" using "Three-sigma"  
+The algorithm used by "k-Fold Cross-Validation" is "tree-sigma" rule     
+
+HealthBot can use "K-fold Three-sigma" for outlier detection  
+We need to indicate to HealthBot which dataset to use (as example "number of BGP prefixes sent" or "cpu load").  
+For this dataset, "K-fold Three-sigma" analyzes data from a device during a configurable learning Period vs data from other devices during the same learning period  
+
+K is the number of devices: if the group has 4 devices, then k=4, so HealthBot will use "4-fold three-sigma".  
+
+In that case, 4 models are built and evaluated by HealthBot.  
+
+Model1: Trained with the data points collected during the learning period from device 1 and device 2 and device 3, then tested with the data points collected during the learning period from device 4   
+
+Model2: Trained with the data points collected during the learning period from device 1 and device 2 and device 4, then tested with the data points collected during the learning period from device 3  
+
+Model3: Trained with the data points collected during the learning period from device 1 and device 3 and device 4, then tested with the data points collected during the learning period from device 2  
+
+Model4: Trained with the data points collected during the learning period from device 2 and device 3 and device 4, then tested with the data points collected during the learning period from device 1  
+
+HealthBot returns 1 if it detects an outlier, and 0 if there is no outlier detected.  
+
+# Machine learning usage with HealthBot 
+
+## How to use machine learning for anomaly detection with HealthBot
+
+HealthBot can use machine learning for anomaly detection (to classify new data points as `normal` or `abnormal`).   
+
+HealthBot supports the following machine learning algorithms: 
+-	Three-sigma for anomaly detection
+-	k-means for anomaly detection.  
+
+For each algorithm, we need to configure: 
+-	the learning-period
+-	the pattern-periodicity 
+
+Machine learning model: 
+-	This is the output generated when you train your machine learning algorithm with your training data-set. The machine learning model is what you get when you run the machine learning algorithm over your training data. 
+-	Training the machine learning algorithm to build models is done every day by HealthBot at midnight. 
+-	The machine learning model is then used in production to handle new data points.  
+
+Learning-period is configured to determine how much historical data the machine learning algorithm uses to build the models. 
+
+For example, if learning period is 7 days, every time we build the models, we fetch past 7 days of data and we train the machine learning algorithm to build new models.  
+
+if the learning period is 7 days, when learning is triggered the 12th Feb 2019 (00:00) to build new models, we fetch data from 5th Feb 2019 00:00 to 12th Feb 2019 00:00 and train the machine learning algorithm.  
+
+If the learning period is 1 month, when learning is triggered the 12th Feb 2019 (00:00), we fetch data from 12th Jan 2019 00:00 to 12th Feb 2019 00:00 and train the machine learning algorithm to build new models.  
+
+pattern-periodicity: 
+-	If we configure ‘1D’ ‘pattern-periodicity’, it means that data of each day of the week has different patterns. So HealthBot creates 7 buckets, one for each day in a week (Monday, Tuesday, …). 
+-	If we configure ‘1H’ ‘pattern-periodicity’, it means that regardless of which day, week or month, data of every hour has specific pattern. So HealthBot creates 24 buckets, one for each hour (00:00-00:59, 1:00-1:59, 2:00-2:59 … 23:00-23:59). 
+-	If we configure ‘1D 1H’ ‘pattern-periodicity’, it means that for every day, data for each hour has different pattern. So, we would have 7 * 24 = 168 buckets. For Monday 24 buckets (1 for every hour), for Tuesday 24 buckets (1 for every hour) and so on. Here it does not matter in which months we are collecting the data from. 
+-	…
+
+For a machine learning algorithm to be able to build a model for a bucket, it requires a minimum number of data points. This depends on what algorithm we are using. 
+-	3-sigma requires only a couple of points per bucket. 
+-	k-mean requires at least 32 data points per bucket. 
+
+Once the models are built, they are used in production to handle new data points. HealthBot uses machine learning for anomaly detection with dynamic thresholds. HealthBot uses the models it built to classify new data points as `normal` or `abnormal`.  
+
+If the data set used to build the models was small, the result will not be accurate. With larger data set to build the models, results accuracy will increase.  
+
+HealthBot builds models based on pattern periodicity.  
+With a pattern periodicity of 1 hour, 24 buckets are formed (one for each hour).  
+
+Learning period is only used to fetch the data to build the models.  
+For example, if we have data for past one year, but we have configured learning period as 30 days, in this case, though we have data for past one year, at every midnight when we are re-building the models, we will fetch only past 30 days of data, bucketize the data points based on the pattern periodicity and build one model for each bucket.  
+
+Minimum learning period can be the time where you can have minimum data points required to build a model for each bucket. But keep learning period larger to have more accurate results.  
+
+Let’s take an example:  
+Let’s say at 13:00 p.m we configure HealthBot to collect data from network devices every 5 seconds and to use k-means for anomaly detection with dynamic thresholds with a pattern periodicity of 1 hour.  
+24 buckets are formed (one for each hour).  
+Models are built daily at midnight. Until then HealthBot will return -1 as there is no model built yet for any of the buckets. So, during the first day, HealthBot will return -1 for each new data point.  
+At midnight the first day, k-means will try to build the models: 
+-	The models for hours 00 – 12 can’t be built yet as there is no data collected yet to build these models. So, during the second day, HealthBot will keep returning -1 until 12:59 p.m. 
+-	Since k-means will have enough data per bucket/hour for hours 13 - 23 (k-means requires at least 32 data points per bucket, and we have 12 * 60 = 720 data points for each of these buckets), it will build the models for these 11 hours/buckets only. From 13:00 p.m the second day, since the models are available, for each new data point, HealthBot will return 0 (normal) or 1 (abnormal).  
+
+So, the second day, HealthBot will return -1 for hours 00 – 12 and 0 and/or 1 for hours 13 - 23  
+
+At midnight the second day, we have data for all hours 0 – 23 (one day of data for hours 0 – 12 hours and 2 days of data for 13 – 23 hours).  
+
+Now since we have enough data points for all the hours/buckets, models for all the hours will be built, and HealthBot will return 0 (normal) or 1 (abnormal) for each new data point it will receive.  
 
 # Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)
 
