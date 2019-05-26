@@ -131,6 +131,9 @@ pip3 install sklearn
 
 ## demo
 
+The demo is about iris flowers classification.  
+We will use this example [accuracy_of_SVC.py](iris_flowers_classification/accuracy_of_SVC.py)  
+
 ### Load the dataset
 
 ```
