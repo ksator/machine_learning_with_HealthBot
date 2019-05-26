@@ -44,12 +44,10 @@ Please read this file first
 
 # HealthBot 
 
-## Overview 
-
 You can use HealthBot to collect data from the network devices, store the data collected in its database, process the data collected.  
 Here's the HealthBot documentation https://techlibrary.juniper.net/documentation/product/en_US/contrail-healthbot 
 
-## HealthBot and machine learning support
+# HealthBot and machine learning support
 
 HealthBot supports machine learnings for anomaly detection and for outlier detection.  
 
@@ -57,19 +55,19 @@ Please read first the file [machine_learning_101.pdf](machine_learning_101.pdf).
 It helps peoples with no machine learning background to better understand machine learning basics.   
 It also help to understand Heathbot support of machine learning   
 
-### anomaly detection
+## anomaly detection
 
 HealthBot supports the following machine learning algorithms for anomaly detection:  
 - Three-sigma rule  
 - k-means for anomaly detection  
 
-### outlier detection
+## outlier detection
 
 HealthBot supports the following machine learning algorithms for outlier detection: 
 - DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
 - K-fold Three-sigma ("K-Fold Cross-Validation" using "Three-sigma")
 
-### anomaly detection vs outlier detection
+## anomaly detection vs outlier detection
 
 HealthBot supports machine learnings for anomaly detection and for outlier detection.  
 
@@ -80,9 +78,9 @@ In HealthBot terminology:
 - outlier detection is group based.  
   It analyzes data from a device during a learning Period vs data from other devices during the same learning period
 
-### three-sigma rule 
+## three-sigma rule 
 
-#### Overview
+### Overview
 
 sigma is the greek letter σ. This is also the Standard Deviation symbol  
 HealthBot uses 3-sigma rule for anomaly detection.  
@@ -96,7 +94,7 @@ x: a new data point
 If abs(x - mean) > (3 * SD) then tree-sigma classifies x as abnormal  
 If abs(x - mean) < (3 * SD) then tree-sigma classifies x as normal  
 
-#### Calculate it by hand  
+### Calculate it by hand  
 
 Data points = 101, 102, 106, 107  
 Mean = (101 +102 + 106 + 107)/4=104  
@@ -108,13 +106,13 @@ mean + 3 * standard deviation = 111.62
 Three-sigma rule classifies a new data point as “normal” if it is between 96.38 and 111.62  
 Three-sigma rule classifies a new data point as “abnormal” if it is outside this range    
 
-#### HealthBot rule example  
+### HealthBot rule example  
 
 HealthBot rule using OpenConfig telemetry to monitor the number of BGP prefixes received per peer, and using a dynamic threshold computed by three-sigma to detect anomaly: https://github.com/ksator/machine_learning_with_HealthBot/blob/master/rules/check-bgp-routes-with-3-sigma.rule  
 
-### k-means for anomaly detection
+## k-means for anomaly detection
 
-#### Overview 
+### Overview 
 
 "k-means clustering" and "k-means for anomaly detection" are two different things.  
 
@@ -124,11 +122,11 @@ HealthBot rule using OpenConfig telemetry to monitor the number of BGP prefixes 
 
 HealthBot uses "k-means for anomaly detection" to build a model and to classify new data points as normal or abnormal.  
 
-#### HealthBot rule example
+### HealthBot rule example
 
 HealthBot rule using OpenConfig telemetry to monitor the number of BGP prefixes received per peer, and using a dynamic threshold computed by k-means to detect anomaly: https://github.com/ksator/machine_learning_with_HealthBot/blob/master/rules/check-bgp-routes-with-k-means.rule  
 
-### K-fold Three-sigma  
+## K-fold Three-sigma  
 
 "K-fold Three-sigma" is "k-Fold Cross-Validation" using "Three-sigma"  
 The algorithm used by "k-Fold Cross-Validation" is "tree-sigma" rule     
