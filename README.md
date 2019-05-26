@@ -347,6 +347,12 @@ The test size is 50% of the whole dataset.
 >>> from sklearn.model_selection import train_test_split
 >>> X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.5)
 ```
+
+X_train has the data for the train split  
+y_train has the target for the train split    
+X_test has the data for the test split  
+y_test has the target for the test split  
+
 X_train has the data for the train split
 ```
 >>> X_train
@@ -522,23 +528,80 @@ array([2, 0, 2, 1, 1, 1, 1, 0, 2, 0, 2, 2, 1, 2, 2, 1, 2, 0, 1, 2, 1, 0,
        1, 1, 0, 0, 1, 2, 2, 2, 2])
 ```
 
-#### 
+#### Select an algorithm
 
 Support vector machines (SVM) is a set of supervised learning methods.  
 Support vector classifier (SVC) is a python class capable of performing classification on a dataset.  
 
+We will use SVC to: 
+- Find a linear separator. A line separating classes. A line separating (classifying) Iris setosa from Iris virginica from Iris versicolor.
+- There are many linear separators: It will choose the optimal one, i.e the one that maximizes our confidence, i.e the one that maximizes the geometrical margin, i.e the one that maximizes the distance between itself and the closest/nearest data point point
+
 From the module svm import the class SVC
 ```
-from sklearn.svm import SVC
+>>> from sklearn.svm import SVC
 ```
 
 Create an instance of a linear SVC
 ```
-clf = SVC(kernel='linear',random_state=1)
+>>> clf = SVC(kernel='linear')
+```
+clf is a variable (we choosed the name clf for classifier).  
+
+#### Fit the model 
+
+let's use the fit method with this instance.  
+This method trains the model and returns the trained model  
+This will fit the model according to the training data.
+```    
+>>> clf.fit(X_train, y_train)
+```
+Now, the clf variable is the fitted model, or trained model.  
+
+#### Evaluate the trained model performance 
+
+Lets use the predict method. This method returns predictions for several unlabeled observations 
+```
+>>> y_pred = clf.predict(X_test)
+>>> y_pred
+array([2, 2, 0, 0, 2, 2, 1, 0, 1, 1, 0, 0, 2, 2, 1, 2, 1, 1, 2, 1, 2, 1,
+       1, 2, 1, 0, 2, 2, 1, 1, 2, 0, 2, 1, 0, 1, 0, 0, 1, 2, 0, 1, 2, 1,
+       1, 2, 1, 1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 0, 2, 0, 1, 0, 1, 2, 2,
+       0, 1, 2, 1, 1, 0, 0, 0, 1])
 ```
 
-Find a linear separator. A line separating classes. A line separating (classifying) Iris setosa from Iris virginica from Iris versicolor.  
-There are many linear separator: It will choose the optimal one, the one that maximizes our confidence, the one that maximizes the geometrical margin, the one that maximizes the distance between itself and the closest/nearest data point point    
+Examine the trained model performance, comparing the predictions with the test target
+
+```
+>>> y_test
+array([1, 2, 0, 0, 2, 2, 1, 0, 1, 1, 0, 0, 2, 2, 1, 2, 1, 1, 2, 1, 1, 1,
+       1, 2, 1, 0, 2, 2, 1, 1, 2, 0, 2, 1, 0, 1, 0, 0, 1, 2, 0, 1, 2, 1,
+       1, 2, 1, 1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 0, 2, 0, 1, 0, 1, 2, 2,
+       0, 1, 2, 1, 1, 0, 0, 0, 1])
+```
+There is two mismatches
+```
+>>> y_pred[0]
+2
+>>> y_test[0]
+1
+
+```
+and
+```
+>>> y_pred[20]
+2
+>>> y_test[20]
+1
+>>> 
+```
+75 samples, 2 mismatches, so 0.97% accuracy  
+```
+>>> from sklearn.metrics import accuracy_score
+>>> accuracy_score(y_test,y_pred)
+0.9733333333333334
+>>> 
+```
 
 # HealthBot 
 
