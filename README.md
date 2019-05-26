@@ -58,6 +58,11 @@ Please read first the file [machine_learning_101.pdf](machine_learning_101.pdf)
 ##  Iris flower data set  
 
 It has data to quantify the morphologic variation of Iris flowers of three related species.  
+The iris dataset consists of measurements of three types of Iris flowers: Iris Setosa, Iris Versicolor, and Iris Virginica.  
+
+The iris dataset is intended to be for a supervised machine learning task because it has labels.  
+It is a classification problem: we are trying to determine the flower categories.  
+This is a supervised classification problem.  
 
 The dataset contains a set of 150 records under five attributes: petal length, petal width, sepal length, sepal width and species.  
 
@@ -94,10 +99,10 @@ it returned a kind of dictionary.
 
 ### Examine the iris dataset
 
-feature_names attribute
+It has 150 rows and 4 columns
 ```
->>> iris["feature_names"]
-['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
+>>> iris.data.shape
+(150, 4)
 ```
 data attribute:  the data to learn
 ```
@@ -253,6 +258,16 @@ array([[5.1, 3.5, 1.4, 0.2],
        [6.2, 3.4, 5.4, 2.3],
        [5.9, 3. , 5.1, 1.8]])
 ```
+first raw
+```
+>>> iris.data[0]
+array([5.1, 3.5, 1.4, 0.2])
+```
+feature_names attribute
+```
+>>> iris["feature_names"]
+['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
+```
 target_names attribute:  the meaning of the labels 
 ```
 >>> iris["target_names"]
@@ -280,13 +295,20 @@ array([0, 0, 1])
 ```
 ### split randomly the iris data set into a train and a test subset  
 
+To measure the performance of prediction, we will split the dataset into training and test sets.  
+The training set refers to data we will learn from.  
+The test set is the data we pretend not to know  
+We will use the test set to measure the performance of our learning   
+
 X has the data to learn and Y the target
 ```
 >>> X = iris.data
 >>> Y = iris.target
 ```
 split randomly the iris data set into a train and a test subset.  
-`test_size` is a float that represent the proportion of the dataset to include in the test split.
+`test_size` is a float that represent the proportion of the dataset to include in the test split.  
+The test size is 50% of the whole dataset. 
+
 ```
 >>> from sklearn.model_selection import train_test_split
 >>> X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.5)
