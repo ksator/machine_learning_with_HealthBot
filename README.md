@@ -7,7 +7,7 @@
   - [Unsupervised learning](#unsupervised-learning)
   - [Clustering](#clustering)   
   - [Classification](#classification)    
-  - [k-Fold Cross-Validation (CV)](#k-fold_cross-validation_cv)
+  - [k-Fold Cross-Validation (CV)](#k-fold_cross-validation-cv)
   - [data set](#data-set)  
   - [scikit-learn python library](#scikit-learn-python-library)  
   - [scikit-learn requirements](#scikit-learn-requirements)  
