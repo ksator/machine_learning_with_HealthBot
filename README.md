@@ -2,14 +2,21 @@
 
 - [About this repository](#about-this-repository)  
 - [machine learning 101](#machine-learning-101)  
-- [Machine learning hello world demo with Python](#machine-learning-hello-world-demo-with-python)  
+- [Machine learning hello world demo with Python (demo with iris flowers](#machine-learning-hello-world-demo-with-python-demo-with-iris-flowers)  
   - [Classification](#classification)  
   - [Supervised learning](#supervised-learning)  
-  - [Iris flower data set](#iris-flower-data-set)  
+  - [data set](#data-set)  
   - [scikit-learn python library](#scikit-learn-python-library)  
   - [scikit-learn requirements](#scikit-learn-requirements)  
   - [scikit-learn installation](#scikit-learn-installation)  
-  - [scikit-learn demo](#scikit-learn-demo)  
+  - [scikit-learn demo](#scikit-learn-demo)
+    - [Load the dataset](#load-the-dataset)
+    - [Examine the dataset](#examine-the-dataset)
+    - [measure the performance of prediction](#measure-the-performance-of-prediction)
+      - [split randomly the data set into a train and a test subset](#split-randomly-the-data-set-into-a-train-and-a-test-subset)
+      - [Select an algorithm](#select-an-algorithm)
+      - [Fit the model](#fit-the-model)
+      - [Evaluate the trained model performance](#evaluate-the-trained-model-performance)
 - [HealthBot](#healthbot)  
   - [Overview](#overview)  
   - [HealthBot and machine learning](#healthbot-and-machine-learning)  
@@ -53,7 +60,7 @@ The file [machine_learning_101.pdf](machine_learning_101.pdf):
   - helps peoples with no machine learning background to better understand machine learning basics 
   - describes machine learning usage with Healthbot  
     
-# Machine learning hello world demo with Python 
+# Machine learning hello world demo with Python (demo with iris flowers)  
 
 Please read first the file [machine_learning_101.pdf](machine_learning_101.pdf)  
 
@@ -69,7 +76,7 @@ Takes as input a training set and output a classifier which predict the class fo
 
 The machine learning algorithm learns on a labeled dataset
 
-##  Iris flower data set  
+##  data set  
 
 It has data to quantify the morphologic variation of Iris flowers of three related species.  
 The iris dataset consists of measurements of three types of Iris flowers: Iris Setosa, Iris Versicolor, and Iris Virginica.  
@@ -103,7 +110,7 @@ pip3 install sklearn
 
 ## scikit-learn demo
 
-### Load the iris dataset
+### Load the dataset
 
 ```
 >>> from sklearn.datasets import load_iris
@@ -111,7 +118,7 @@ pip3 install sklearn
 ```
 it returns a kind of dictionary. 
 
-### Examine the iris dataset
+### Examine the dataset
 
 #### shape  
 It has 150 rows and 4 columns
@@ -332,7 +339,7 @@ To measure the performance of prediction, we will split the dataset into trainin
 - The test set is the data we pretend not to know  
 - We will use the test set to measure the performance of our learning   
 
-#### split randomly the iris data set into a train and a test subset  
+#### split randomly the data set into a train and a test subset  
 
 X has the data to learn and Y the target
 ```
