@@ -90,10 +90,9 @@ pip3 install sklearn
 >>> from sklearn.datasets import load_iris
 >>> iris=load_iris()
 ```
+it returned a kind of dictionary. 
 
 ### Examine the iris dataset
-
-it returned a dictionary. 
 
 feature_names attribute
 ```
