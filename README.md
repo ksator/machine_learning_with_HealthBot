@@ -4,7 +4,7 @@
 - [machine learning 101](#machine-learning-101)  
 - [Machine learning hello world demo with Python](#machine-learning-hello-world-demo-with-python)  
   - [Iris flower data set](#iris-flower-data-set)  
-  - [About scikit-learn python library](#about-scikit-learn-python-library)  
+  - [scikit-learn python library](#scikit-learn-python-library)  
   - [scikit-learn requirements](#scikit-learn-requirements)  
   - [scikit-learn installation](#scikit-learn-installation)  
   - [scikit-learn demo](#scikit-learn-demo)  
@@ -55,6 +55,14 @@ The file [machine_learning_101.pdf](machine_learning_101.pdf):
 
 Please read first the file [machine_learning_101.pdf](machine_learning_101.pdf)  
 
+## Classification 
+
+Classification categorizes data points into the desired class.  
+There is a distinct number of classes.  
+Classes are sometimes called targets, labels or categories    
+
+Takes as input a training set and output a classifier which predict the class for any new data point 
+
 ##  Iris flower data set  
 
 It has data to quantify the morphologic variation of Iris flowers of three related species.  
@@ -75,7 +83,7 @@ Samples per class: 50
 Samples total: 150  
 Dimensionality: 4  
 
-## About scikit-learn python library  
+## scikit-learn python library  
 Scikit-Learn, also known as sklearn, is Python general-purpose machine learning library  
 Scikit-Learn is very versatile. 
 
@@ -99,12 +107,14 @@ it returned a kind of dictionary.
 
 ### Examine the iris dataset
 
+#### shape  
 It has 150 rows and 4 columns
 ```
 >>> iris.data.shape
 (150, 4)
 ```
-data attribute:  the data to learn
+#### data attribute 
+the data to learn
 ```
 >>> iris["data"]
 array([[5.1, 3.5, 1.4, 0.2],
@@ -263,12 +273,26 @@ first raw
 >>> iris.data[0]
 array([5.1, 3.5, 1.4, 0.2])
 ```
-feature_names attribute
+last raw
+```
+>>> iris.data[-1]
+array([5.9, 3. , 5.1, 1.8])
+```
+Let’s say you are interested in the samples 10, 25, and 50
+```
+>>> iris.data[[10, 25, 50]]
+array([[5.4, 3.7, 1.5, 0.2],
+       [5. , 3. , 1.6, 0.2],
+       [7. , 3.2, 4.7, 1.4]])
+>>> 
+```
+#### feature_names attribute
 ```
 >>> iris["feature_names"]
 ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
 ```
-target_names attribute:  the meaning of the labels 
+#### target_names attribute 
+the meaning of the labels 
 ```
 >>> iris["target_names"]
 array(['setosa', 'versicolor', 'virginica'], dtype='<U10')
@@ -277,7 +301,8 @@ array(['setosa', 'versicolor', 'virginica'], dtype='<U10')
 >>> list(iris.target_names)
 ['setosa', 'versicolor', 'virginica']
 ```
-target attribute:  the classification labels 
+#### target attribute 
+the classification labels 
 ```
 >>> iris["target"]
 array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -293,12 +318,14 @@ Let’s say you are interested in the samples 10, 25, and 50
 >>> iris.target[[10, 25, 50]]
 array([0, 0, 1])
 ```
-### split randomly the iris data set into a train and a test subset  
+### measure the performance of prediction 
 
 To measure the performance of prediction, we will split the dataset into training and test sets.  
-The training set refers to data we will learn from.  
-The test set is the data we pretend not to know  
-We will use the test set to measure the performance of our learning   
+- The training set refers to data we will learn from.  
+- The test set is the data we pretend not to know  
+- We will use the test set to measure the performance of our learning   
+
+#### split randomly the iris data set into a train and a test subset  
 
 X has the data to learn and Y the target
 ```
@@ -488,6 +515,23 @@ array([2, 0, 2, 1, 1, 1, 1, 0, 2, 0, 2, 2, 1, 2, 2, 1, 2, 0, 1, 2, 1, 0,
        1, 1, 0, 0, 1, 2, 2, 2, 2])
 ```
 
+#### 
+
+Support vector machines (SVM) is a set of supervised learning methods.  
+Support vector classifier (SVC) is a python class capable of performing classification on a dataset.  
+
+From the module svm import the class SVC
+```
+from sklearn.svm import SVC
+```
+
+Create an instance of a linear SVC
+```
+clf = SVC(kernel='linear',random_state=1)
+```
+
+Find a linear separator. A line separating classes. A line separating (classifying) Iris setosa from Iris virginica from Iris versicolor.  
+There are many linear separator: It will choose the optimal one, the one that maximizes our confidence, the one that maximizes the geometrical margin, the one that maximizes the distance between itself and the closest/nearest data point point    
 
 # HealthBot 
 
