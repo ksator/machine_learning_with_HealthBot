@@ -2,7 +2,7 @@
 
 - [About this repository](#about-this-repository)  
 - [machine learning 101](#machine-learning-101)  
-- [HealthBot](#healthbot)  
+- [About HealthBot](#about-healthbot)  
 - [HealthBot and machine learning support](#healthbot-and-machine-learning-support)  
   - [anomaly detection](#anomaly-detection)
   - [outlier detection](#outlier-detection)
@@ -10,7 +10,8 @@
   - [three-sigma rule](#three-sigma-rule)
   - [k-means for anomaly detection](#k-means-for-anomaly-detection)
   - [K-fold Three-sigma](#k-fold-three-sigma)
-- [Machine learning usage with HealthBot](#Machine-learning-usage-with-healthBot)
+  - [DBSCAN (Density-Based Spatial Clustering of Applications with Noise)](#dbscan-density-based-spatial-clustering-of-applications-with-noise)
+- [Machine learning usage with HealthBot](#machine-learning-usage-with-healthBot)
   - [How to use machine learning for anomaly detection with HealthBot](#how-to-use-machine-learning-for-anomaly-detection-with-healthBot)
 - [Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)](#machine-learning-for-anomaly-detection-demo-demo-with-the-number-of-bgp-prefixes-received)  
   - [Demo overview](#demo-overview)  
@@ -50,7 +51,7 @@ The file [machine_learning_101.pdf](machine_learning_101.pdf) helps peoples with
 It also help to understand Heathbot support of machine learning   
 Please read this file first  
 
-# HealthBot 
+# About HealthBot 
 
 You can use HealthBot to collect data from the network devices, store the data collected in its database, process the data collected.  
 Here's the HealthBot documentation https://techlibrary.juniper.net/documentation/product/en_US/contrail-healthbot 
@@ -102,6 +103,8 @@ x: a new data point
 If abs(x - mean) > (3 * SD) then tree-sigma classifies x as abnormal  
 If abs(x - mean) < (3 * SD) then tree-sigma classifies x as normal  
 
+Please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf) for more details  
+
 ### Calculate it by hand  
 
 Data points = 101, 102, 106, 107  
@@ -130,6 +133,8 @@ HealthBot rule using OpenConfig telemetry to monitor the number of BGP prefixes 
 
 HealthBot uses "k-means for anomaly detection" to build a model and to classify new data points as normal or abnormal.  
 
+Please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf) for more details  
+
 ### HealthBot rule example
 
 HealthBot rule using OpenConfig telemetry to monitor the number of BGP prefixes received per peer, and using a dynamic threshold computed by k-means to detect anomaly: https://github.com/ksator/machine_learning_with_HealthBot/blob/master/rules/check-bgp-routes-with-k-means.rule  
@@ -156,6 +161,11 @@ Model3: Trained with the data points collected during the learning period from d
 Model4: Trained with the data points collected during the learning period from device 2 and device 3 and device 4, then tested with the data points collected during the learning period from device 1  
 
 HealthBot returns 1 if it detects an outlier, and 0 if there is no outlier detected.  
+
+## DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
+
+Please refer to the file [machine_learning_101.pdf](machine_learning_101.pdf) for more details  
+
 
 # Machine learning usage with HealthBot 
 
