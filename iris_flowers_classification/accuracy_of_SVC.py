@@ -10,7 +10,5 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.5)
 clf = SVC(kernel='linear')
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
-y_pred
-y_test
 accuracy_score(y_test,y_pred)
 print ("Accuracy of SVC fitted with iris data set:",accuracy_score(y_test,y_pred))
