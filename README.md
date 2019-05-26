@@ -33,7 +33,6 @@ In this repository, you will find:
   It computes the three-sigma rule 
 - The file [kmeans.xlsx](kmeans.xlsx)  
   It computes one iteration of k-means with k=2  
-- A machine learning hello world demo with python (about iris flowers classification)   
 - Automation content to configure HealthBot.  
   Healthbot will: 
   - use openconfig to collect data from Junos devices 
