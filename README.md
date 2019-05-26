@@ -3,8 +3,15 @@
 - [About this repository](#about-this-repository)  
 - [machine learning 101](#machine-learning-101)  
 - [HealthBot](#healthbot)  
-  - [Overview](#overview)  
-  - [HealthBot and machine learning](#healthbot-and-machine-learning)  
+- [HealthBot and machine learning support](#healthbot-and-machine-learning-support)  
+  - [anomaly detection](#anomaly-detection)
+  - [outlier detection](#outlier-detection)
+  - [anomaly-detection-vs-outlier-detection](#anomaly-detection-vs-outlier-detection)
+  - [three-sigma rule](#three-sigma-rule)
+  - [k-means for anomaly detection](#k-means-for-anomaly-detection)
+  - [K-fold Three-sigma](#k-fold-three-sigma)
+- [Machine learning usage with HealthBot](#Machine-learning-usage-with-healthBot)
+  - [How to use machine learning for anomaly detection with HealthBot](#how-to-use-machine-learning-for-anomaly-detection-with-healthBot)
 - [Machine learning for anomaly detection demo (demo with the number of BGP prefixes received)](#machine-learning-for-anomaly-detection-demo-demo-with-the-number-of-bgp-prefixes-received)  
   - [Demo overview](#demo-overview)  
   - [requirements](#requirements)  
@@ -15,6 +22,7 @@
   - [Junos configuration](#junos-configuration)  
   - [HealthBot configuration](#healthbot-configuration)  
   - [Update the number of BGP prefixes received](#update-the-number-of-bgp-prefixes-received)  
+  
   
 ## About this repository 
 
